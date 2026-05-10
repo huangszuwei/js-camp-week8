@@ -36,8 +36,17 @@ async function placeOrder(userInfo) {
 async function getOrders() {
   // 請實作此函式
   // 提示：呼叫 fetchOrders() 取得訂單陣列並回傳
+  /*助教直播
   const orders = await fetchOrders();
   return orders;
+  */
+ //助教Notion講義
+  try {
+    return await fetchOrders();
+  } catch (error) {
+    console.error("無法取得訂單列表:", error.message);
+    return [];
+  }
 }
 
 /**
@@ -47,8 +56,11 @@ async function getOrders() {
 async function getUnpaidOrders() {
   // 請實作此函式
   // 提示：呼叫 fetchOrders() 後，篩選出 paid 為 false 的訂單
-  const orders = await fetchOrders();
+
+  //const orders = await fetchOrders();
+  const orders = await getOrders();
   return orders.filter((order) => !order.paid);
+
 }
 
 /**
@@ -58,7 +70,8 @@ async function getUnpaidOrders() {
 async function getPaidOrders() {
   // 請實作此函式
   // 提示：呼叫 fetchOrders() 後，篩選出 paid 為 true 的訂單
-  const orders = await fetchOrders();
+  //const orders = await fetchOrders();
+  const orders = await getOrders();
   return orders.filter((order) => order.paid);
 }
 
@@ -74,7 +87,7 @@ async function updatePaymentStatus(orderId, isPaid) {
   // 回傳格式：{ success: true, data: ... } / { success: false, error: ... }
   
   try {
-    const result = await updatePaymentStatus(orderId, isPaid);
+    const result = await updateOrderStatus(orderId, isPaid);
     return {success: true, data: result};
   } catch (error) {
     return {success: false, error: error.message};
@@ -91,7 +104,7 @@ async function removeOrder(orderId) {
   // 提示：呼叫 deleteOrder()
   // 回傳格式：{ success: true, data: ... } / { success: false, error: ... }
   try {
-    const result = await removeOrder(orderId);
+    const result = await deleteOrder(orderId);
     return {success: true, data: result};
   } catch (error) {
     return {success: false, error: error.message};
@@ -156,7 +169,8 @@ function displayOrders(orders) {
   // 商品明細：
   //   - 產品名稱 x 2（產品數量）
   // ========================================
-  if(!order.orders || order.orders.length === 0) {
+  //原if(!order.orders || order.oorders.length === 0)
+  if(!orders || orders.length === 0) {
     console.log("沒有訂單");
     return;
   }
@@ -164,7 +178,7 @@ function displayOrders(orders) {
   console.log(`購訂單列表：`);
   console.log(`========================================`);
 
-  cart.carts.forEach((order, index) => {
+  orders.forEach((order, index) => {
     const formatted = formatOrder(order);
     console.log(`訂單 ${index + 1}`);
     console.log(`----------------------------------------`);

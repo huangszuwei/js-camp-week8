@@ -70,6 +70,7 @@ function getDaysAgo(timestamp) {
  */
 function validateOrderUser(data) {
   // 請實作此函式
+  /*助教直播
   const errors = [];
   const telRegex = /^09\d{8}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -95,6 +96,35 @@ function validateOrderUser(data) {
     errors.push("付款方式必須是 'ATM', 'Credit Card', 'Apple Pay'");
   }
   return {isValid: errors.length === 0, errors};
+  */
+  //助教Notion講義
+  const errors = [];
+  const { name, tel, email, address, payment } = data;
+
+  if (!name || name.trim() === '') {
+    errors.push('姓名為必填');
+  }
+
+  if (!tel || !/^09\d{8}$/.test(tel)) {
+    errors.push('電話格式不正確（應為09開頭的10碼手機）');
+  }
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.push('Email 格式不正確');
+  }
+
+  if (!address || address.trim() === '') {
+    errors.push('地址為必填');
+  }
+
+  if (!payment || !['ATM', '信用卡', 'ApplePay'].includes(payment)) {
+    errors.push('付款方式不正確');
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
 }
 
 /**
