@@ -50,14 +50,14 @@ const validUser = {
   tel: '0912345678',
   email: 'test@test.com',
   address: '測試地址',
-  payment: 'ATM'
+  payment: 'ATM',
 };
 const invalidUser = {
   name: '',
   tel: '1234',
   email: 'invalid',
   address: '',
-  payment: 'Bitcoin'
+  payment: 'Bitcoin',
 };
 const mockOrder = {
   id: 'order-1',
@@ -86,7 +86,7 @@ const mockCartData = {
 const mockOrdersData = [
   {
     id: 'order-1',
-    user: { name: '測試', tel: '0912345678', email: 'test@test.com', address: '測試地址', payment: 'ATM' },
+    user: { name: '測試', tel: '0912345678', email: 'test@test.com', address: '測試地址', payment: 'ATM', },
     products: {},
     total: 1000,
     paid: false,
@@ -94,7 +94,7 @@ const mockOrdersData = [
   },
   {
     id: 'order-2',
-    user: { name: '測試2', tel: '0987654321', email: 'test2@test.com', address: '測試地址2', payment: 'Credit Card' },
+    user: { name: '測試2', tel: '0987654321', email: 'test2@test.com', address: '測試地址2', payment: 'Credit Card', },
     products: {},
     total: 2000,
     paid: true,
